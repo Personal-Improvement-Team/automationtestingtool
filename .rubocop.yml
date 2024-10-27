@@ -1,3 +1,5 @@
+inherit_from: .rubocop_todo.yml
+
 # Omakase Ruby styling for Rails
 inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 
@@ -6,3 +8,25 @@ inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 # # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
 # Layout/SpaceInsideArrayLiteralBrackets:
 #   Enabled: false
+
+require:
+  - rubocop-rails
+
+AllCops:
+  Exclude:
+    - 'db/schema.rb'      # Ignore schema file
+    - 'bin/*'             # Ignore binary files
+    - 'node_modules/**/*' # Ignore node_modules
+
+Rails:
+  Enabled: true           # Enable Rails-specific cops
+
+# Customize specific cops
+Metrics/LineLength:
+  Max: 120  # Increase line length limit from 80 to 120 characters
+
+Metrics/MethodLength:
+  Max: 15   # Limit method length to 15 lines
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes  # Enforce using double quotes for strings
